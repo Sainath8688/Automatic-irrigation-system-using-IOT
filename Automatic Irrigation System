@@ -1,0 +1,48 @@
+// include the library code:
+#include <LiquidCrystal.h>
+
+//LiquidCrystal lcd (rs, en, d4, d5, d6, d7);
+  LiquidCrystal lcd(13, 12, 11, 10, 9, 8);
+ 
+const int SENSOR_PIN = A0;
+const int Motor_PIN = 7;
+
+void setup ()
+{
+  pinMode (SENSOR_PIN, INPUT); // Set the Sensor pin as INPUT 
+  pinMode(Motor_PIN, OUTPUT); // Set the Motor pin as OUTPUT
+
+  // set up the LCD's number of columns and rows:
+  lcd.begin(20, 4);
+  // set the cursor position:
+  lcd.setCursor (0,0);
+  // Print a message to the LCD.
+  lcd.print (" THE BRIGHT LIGHT          ");
+  // set the cursor position:
+  lcd.setCursor(0,1);
+  // Print a message to the LCD.
+  lcd.print ("SMART PLANT WATERING                     ");
+  delay (2500);
+}
+void loop  ()
+{
+  int Sensor_Val = analogRead (SENSOR_PIN); //get reading from Sensor
+  int Moisture = map (Sensor_Val, 0,1019, 0,100);
+  lcd.setCursor(0, 2);
+  lcd.print ("MOISTER: ");
+  lcd.print (Moisture);
+  lcd.print (" %           ");
+
+  if (Moisture < 30) //If Moisture is Less than 30%
+  {
+    lcd.setCursor(0, 3);
+    lcd.print ("MOTOR: ON      ");
+    digitalWrite (Motor_PIN, HIGH);
+  }
+  if (Moisture > 80)
+  {
+    lcd.setCursor (0, 3);
+    lcd.print ("MOTOR: OFF          ");
+    digitalWrite(Motor_PIN, LOW);
+  }
+}
