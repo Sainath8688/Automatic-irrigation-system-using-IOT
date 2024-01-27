@@ -46,3 +46,5 @@ void loop  ()
     digitalWrite(Motor_PIN, LOW);
   }
 }
+
+![automatic irrigation system](https://github.com/Sainath8688/Automatic-irrigation-system-using-IOT/assets/135515113/04c69460-082a-47bb-8921-7f4e2a9212fc)
